@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.person.entity.Person;
+import com.capgemini.person.entity.PersonCertifications;
 import com.capgemini.person.entity.PersonalData;
 import com.capgemini.person.service.PersonService;
 
@@ -23,5 +24,10 @@ public class PersonController {
 	@RequestMapping("/show")
 	public Person showPerson() { 
 		return service.showPersonById(101);
+	}
+	
+	@RequestMapping("/certification")
+	public Person cerficationPerson() { 
+		PersonCertifications c= new PersonCertifications(2000,"Java",);
 	}
 }

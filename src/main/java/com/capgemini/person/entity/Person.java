@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -16,6 +17,10 @@ public class Person {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true)
 	private PersonalData details;
+	
+	@ManyToOne
+	@JoinColumn
+	private PersonCertifications certificates;
 
 	public Person() {
 		super();
