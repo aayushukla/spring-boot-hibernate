@@ -14,43 +14,58 @@ import com.capgemini.person.service.PersonService;
 
 @RestController
 public class PersonController {
-	
+
 	@Autowired
 	PersonService service;
-	
-	
-	  @RequestMapping("/") public Person addPerson() { Person person = new
-	  Person(101,"Moriarty",new PersonalData(1,"b-",184,70));
-	  service.addNewPersonToDatabase(person); return person; }
-	  
-	  @RequestMapping("/show") public Person showPerson() { return
-	  service.showPersonById(101); }
-	 
-	
+
+	@RequestMapping("/")
+	public Person addPerson() {
+		Person person = new Person(101, "Moriarty", new PersonalData(1, "b-", 184, 70));
+		service.addNewPersonToDatabase(person);
+		return person;
+	}
+
+	@RequestMapping("/show")
+	public Person showPerson() {
+		return service.showPersonById(101);
+	}
+
 	@RequestMapping("/certification")
 	public List<Person> personList() {
-		
-		List<Person> personList= new ArrayList<Person>();
-		
-		PersonCertifications certification1=new PersonCertifications(102,"java");
-		PersonCertifications certification2=new PersonCertifications(103,"python");
-		PersonCertifications certification3=new PersonCertifications(104,".net");
-		PersonCertifications certification4=new PersonCertifications(105,"swift");
-		
-	    List<PersonCertifications> certifications= new ArrayList<>();
+
+		List<Person> personList = new ArrayList<Person>();
+
+		//Available Certifications
+		PersonCertifications certification1 = new PersonCertifications(102, "java");
+		PersonCertifications certification2 = new PersonCertifications(103, "python");
+		PersonCertifications certification3 = new PersonCertifications(104, ".net");
+		PersonCertifications certification4 = new PersonCertifications(105, "swift");
+
+		//Certifications taken by sophie
+		List<PersonCertifications> certifications = new ArrayList<>();
 		certifications.add(certification1);
 		certifications.add(certification2);
-		
-		List<PersonCertifications> certifications2= new ArrayList<>();
+
+		//Certifications taken by rose
+		List<PersonCertifications> certifications2 = new ArrayList<>();
 		certifications2.add(certification4);
 		certifications2.add(certification3);
 
-		Person p1= new Person(101,"SophieTurner",certifications);
-		Person p2= new Person(102,"Rose",certifications);
-		
+		//Creating objects
+		Person p1 = new Person(101, "SophieTurner", certifications);
+		Person p2 = new Person(102, "Rose", certifications);
+
+		//Adding data for sophie and rose in a list
 		personList.add(p1);
 		personList.add(p2);
-		
+
+		//Saving the list in h2 database
+		service.oneToManyAddition(personList);
 		return personList;
+	}
+	
+	@RequestMapping("/certificateshow")
+	public Person showPersonCertificates() {
+		return service.showOneToMany(1);
 	}
 }
