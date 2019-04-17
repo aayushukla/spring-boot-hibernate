@@ -12,6 +12,6 @@ public interface PersonService {
 	
 	public void oneToManyAddition(List<Person> person);
 	
-	public Person showOneToMany(int id);
+	public List<Person> showOneToMany();
 
 }

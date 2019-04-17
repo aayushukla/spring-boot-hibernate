@@ -3,16 +3,22 @@ package com.capgemini.person.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="person")
 public class Person {
 
 	@Id
+	@Column(name="personid")
 	private int personid;
 	private String personName;
 
@@ -22,7 +28,24 @@ public class Person {
 	private PersonalData details;
 
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+
 	private List<PersonCertifications> certificates;
+
+	@ManyToMany
+	 @JoinTable(name ="person_personproject",
+	 joinColumns = @JoinColumn(name = "personid"),
+	 inverseJoinColumns = @JoinColumn(name = "projectid"))
+
+	private List<PersonProject> projects;
+
+	public Person(int personid, String personName, List<PersonCertifications> certificates,
+			List<PersonProject> projects) {
+		super();
+		this.personid = personid;
+		this.personName = personName;
+		this.certificates = certificates;
+		this.projects = projects;
+	}
 
 	public Person(int personid, String personName, List<PersonCertifications> certificates) {
 		super();
@@ -73,6 +96,14 @@ public class Person {
 
 	public void setDetails(PersonalData details) {
 		this.details = details;
+	}
+
+	public List<PersonProject> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<PersonProject> projects) {
+		this.projects = projects;
 	}
 
 }

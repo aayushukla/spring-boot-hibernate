@@ -29,8 +29,8 @@ public class PersonServiceImpl implements PersonService {
 	}
 	
 	@Override
-	public Person showOneToMany(int id) {
-		return (dao.findAll().get(id));
+	public List<Person> showOneToMany() {
+		return dao.findAll();
 	}
 
 }
