@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.person.entity.Person;
 import com.capgemini.person.entity.PersonCertifications;
+import com.capgemini.person.entity.PersonCertifications;
 import com.capgemini.person.entity.PersonalData;
 import com.capgemini.person.service.PersonService;
 
@@ -30,19 +31,19 @@ public class PersonController {
 	}
 	
 	@RequestMapping("/certification")
-	public PersonCertifications cerficationPerson() {
+	public Person cerficationPerson() {
 		
-	    List<Person> person= new ArrayList<>();
-		Person person1=new Person(102,"Mrunal",new PersonalData(2,"b+",280,50));
-		Person person2=new Person(103,"shinchan",new PersonalData(3,"a+",380,230));
-		Person person3=new Person(104,"donald",new PersonalData(4,"ab+",230,80));
-		Person person4=new Person(105,"mango",new PersonalData(5,"o",160,60));
-		person.add(person1);
-		person.add(person2);
-		person.add(person3);
-		person.add(person4);
+	    List<PersonCertifications> certifications= new ArrayList<>();
+		PersonCertifications person1=new PersonCertifications(102,"java");
+		PersonCertifications person2=new PersonCertifications(103,"python");
+		PersonCertifications person3=new PersonCertifications(104,".net");
+		PersonCertifications person4=new PersonCertifications(105,"swift");
+		certifications.add(person1);
+		certifications.add(person2);
+		certifications.add(person3);
+		certifications.add(person4);
 		
-		PersonCertifications c= new PersonCertifications(2000,"Java",person);
+		Person c= new Person(2000,"Java",certifications);
 		return c;
 	}
 }

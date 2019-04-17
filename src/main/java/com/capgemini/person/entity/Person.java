@@ -1,9 +1,12 @@
 package com.capgemini.person.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -19,8 +22,14 @@ public class Person {
 	private PersonalData details;
 	
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-	@JoinColumn
-	private PersonCertifications certificates;
+	private List<PersonCertifications> certificates;
+
+	public Person(int personid, String personName, List<PersonCertifications> certificates) {
+		super();
+		this.personid = personid;
+		this.personName = personName;
+		this.certificates= certificates;
+	}
 
 	public Person() {
 		super();

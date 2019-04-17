@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -14,16 +16,31 @@ public class PersonCertifications {
 	@Id
 	private int certificationId;
 	private String certificationDesc;
-	
-	
 	@ManyToOne
-    private List<Person> person;
+	@JoinColumn
+    private Person person;
 
-	public PersonCertifications(int certificationId, String certificationDesc, List<Person> person) {
+	public int getCertificationId() {
+		return certificationId;
+	}
+
+	public void setCertificationId(int certificationId) {
+		this.certificationId = certificationId;
+	}
+
+	public String getCertificationDesc() {
+		return certificationDesc;
+	}
+
+	public void setCertificationDesc(String certificationDesc) {
+		this.certificationDesc = certificationDesc;
+	}
+
+	public PersonCertifications(int certificationId, String certificationDesc) {
 		super();
 		this.certificationId = certificationId;
 		this.certificationDesc = certificationDesc;
-		this.person = person;
+
 	}
 
 	public PersonCertifications() {
