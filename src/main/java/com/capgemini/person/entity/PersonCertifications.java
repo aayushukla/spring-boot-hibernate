@@ -1,13 +1,11 @@
 package com.capgemini.person.entity;
 
-import java.util.ArrayList;
 import java.util.List;
-
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -18,9 +16,8 @@ public class PersonCertifications {
 	private String certificationDesc;
 	
 	
-	@OneToMany(mappedBy = "certification", cascade = CascadeType.ALL)
-    private List<Person> person= new ArrayList<>();
-
+	@ManyToOne
+    private List<Person> person;
 
 	public PersonCertifications(int certificationId, String certificationDesc, List<Person> person) {
 		super();
@@ -28,7 +25,6 @@ public class PersonCertifications {
 		this.certificationDesc = certificationDesc;
 		this.person = person;
 	}
-
 
 	public PersonCertifications() {
 		super();

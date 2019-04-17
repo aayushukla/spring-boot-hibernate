@@ -4,7 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -18,7 +18,7 @@ public class Person {
 	@JoinColumn(unique = true)
 	private PersonalData details;
 	
-	@ManyToOne
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
 	@JoinColumn
 	private PersonCertifications certificates;
 
