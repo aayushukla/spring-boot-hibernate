@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.person.entity.Person;
 import com.capgemini.person.entity.PersonCertifications;
-import com.capgemini.person.entity.PersonCertifications;
 import com.capgemini.person.entity.PersonalData;
 import com.capgemini.person.service.PersonService;
 
@@ -19,31 +18,39 @@ public class PersonController {
 	@Autowired
 	PersonService service;
 	
-	@RequestMapping("/")
-	public Person addPerson() {
-		Person person = new Person(101,"Moriarty",new PersonalData(1,"b-",184,70));
-		service.addNewPersonToDatabase(person);
-		return person;
-	}
-	@RequestMapping("/show")
-	public Person showPerson() { 
-		return service.showPersonById(101);
-	}
+	
+	  @RequestMapping("/") public Person addPerson() { Person person = new
+	  Person(101,"Moriarty",new PersonalData(1,"b-",184,70));
+	  service.addNewPersonToDatabase(person); return person; }
+	  
+	  @RequestMapping("/show") public Person showPerson() { return
+	  service.showPersonById(101); }
+	 
 	
 	@RequestMapping("/certification")
-	public Person cerficationPerson() {
+	public List<Person> personList() {
+		
+		List<Person> personList= new ArrayList<Person>();
+		
+		PersonCertifications certification1=new PersonCertifications(102,"java");
+		PersonCertifications certification2=new PersonCertifications(103,"python");
+		PersonCertifications certification3=new PersonCertifications(104,".net");
+		PersonCertifications certification4=new PersonCertifications(105,"swift");
 		
 	    List<PersonCertifications> certifications= new ArrayList<>();
-		PersonCertifications person1=new PersonCertifications(102,"java");
-		PersonCertifications person2=new PersonCertifications(103,"python");
-		PersonCertifications person3=new PersonCertifications(104,".net");
-		PersonCertifications person4=new PersonCertifications(105,"swift");
-		certifications.add(person1);
-		certifications.add(person2);
-		certifications.add(person3);
-		certifications.add(person4);
+		certifications.add(certification1);
+		certifications.add(certification2);
 		
-		Person c= new Person(2000,"Java",certifications);
-		return c;
+		List<PersonCertifications> certifications2= new ArrayList<>();
+		certifications2.add(certification4);
+		certifications2.add(certification3);
+
+		Person p1= new Person(101,"SophieTurner",certifications);
+		Person p2= new Person(102,"Rose",certifications);
+		
+		personList.add(p1);
+		personList.add(p2);
+		
+		return personList;
 	}
 }

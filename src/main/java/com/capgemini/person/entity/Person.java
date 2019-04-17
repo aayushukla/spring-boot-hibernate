@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -18,9 +17,10 @@ public class Person {
 	private String personName;
 
 	@OneToOne(cascade = CascadeType.ALL)
+
 	@JoinColumn(unique = true)
 	private PersonalData details;
-	
+
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
 	private List<PersonCertifications> certificates;
 
@@ -28,7 +28,7 @@ public class Person {
 		super();
 		this.personid = personid;
 		this.personName = personName;
-		this.certificates= certificates;
+		this.certificates = certificates;
 	}
 
 	public Person() {
@@ -59,6 +59,14 @@ public class Person {
 		this.personName = personName;
 	}
 
+	public List<PersonCertifications> getCertificates() {
+		return certificates;
+	}
+
+	public void setCertificates(List<PersonCertifications> certificates) {
+		this.certificates = certificates;
+	}
+
 	public PersonalData getDetails() {
 		return details;
 	}
@@ -66,5 +74,5 @@ public class Person {
 	public void setDetails(PersonalData details) {
 		this.details = details;
 	}
-	
+
 }
